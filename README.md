@@ -38,7 +38,7 @@ On a freshly installed Ubuntu 20.04.4 LTS with desktop image, OpenCV 4.2.0 is in
 - [General installation instruction](https://docs.opencv.org/4.x/d0/d3d/tutorial_general_install.html). 
 - If you want CUDA to be included: [How to install OpenCV 4.5.2 with CUDA 11.2 and CUDNN 8.2 in Ubuntu 20.04](https://gist.github.com/raulqf/f42c718a658cddc16f9df07ecc627be7)
 
-For example, the main commands for OpenCV 4.5.1 without CUDA and other bells and whistles:
+For example, the main commands for OpenCV 4.4.0 without CUDA and other bells and whistles:
 ```
 git clone https://github.com/opencv/opencv
 git -C opencv checkout 4.4.0
