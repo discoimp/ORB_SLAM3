@@ -55,7 +55,7 @@ sudo make install
 
 ```
 # Clone the repo:
-git clone https://github.com/thien94/ORB_SLAM3.git ORB_SLAM3
+git clone https://github.com/discoimp/ORB_SLAM3.git ORB_SLAM3
 
 # Build
 cd ORB_SLAM3
