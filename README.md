@@ -41,7 +41,7 @@ On a freshly installed Ubuntu 20.04.4 LTS with desktop image, OpenCV 4.2.0 is in
 For example, the main commands for OpenCV 4.5.1 without CUDA and other bells and whistles:
 ```
 git clone https://github.com/opencv/opencv
-git -C opencv checkout 4.5.1
+git -C opencv checkout 4.4.0
 
 cd opencv
 mkdir build
