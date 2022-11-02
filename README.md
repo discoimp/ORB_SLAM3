@@ -24,7 +24,7 @@ git clone https://github.com/stevenlovegrove/Pangolin.git
 cd Pangolin
 mkdir build && cd build
 cmake ..
-make
+make -j4
 sudo make install
 ```
 ### 1.2 OpenCV
