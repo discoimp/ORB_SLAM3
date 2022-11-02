@@ -11,7 +11,7 @@ sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security m
 sudo apt update
 
 sudo apt-get install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev libjasper-dev libglew-dev libboost-all-dev libssl-dev
-sudo apt install libeigen3-dev
+sudo apt install libeigen3-dev curl
 ```
 ### 1.1 Pangolin:
 ```
@@ -70,6 +70,17 @@ chmod +x build.sh
 ## 3. Run examples
 
 ### [EuRoC datset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets):
+I ran into trouble running the dataset due to a error: described by someone else here: https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399
+First check if the path to your missing component is here: “/etc/ld.so.conf"
+```
+gedit /etc/ld.so.conf
+#then run this to flush the cache (I guess) .
+sudo ldconfig
+# if the library still is not working we can do this ugly move: https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script
+I've pasted the commands here:
+
+```
+
 ```
 # Download
 cd ~
