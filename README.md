@@ -39,9 +39,16 @@ For example, the main commands for OpenCV 4.4.0 without CUDA and other bells and
 cd ~/Dev
 git clone https://github.com/opencv/opencv
 git -C opencv checkout 4.4.0
-cd opencv
-mkdir build
-cd build
+gedit ~/Dev/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp
+
+Add these lines at line 42:
+#define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)
+#define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER
+#define AVFMT_RAWPICTURE 0x0020
+
+
+mkdir -p ~/Dev/opencv/build
+cd ~/Dev/opencv/build
 cmake ..
 make -j4
 sudo make install
