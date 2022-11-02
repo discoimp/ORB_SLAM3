@@ -80,6 +80,7 @@ mkdir MH01
 unzip MH_01_easy.zip -d MH01/
 
 # Run in mono-inertial mode
+cd ~/Dev/ORB_SLAM3
 ./Examples/Monocular-Inertial/mono_inertial_euroc ./Vocabulary/ORBvoc.txt ./Examples/Monocular-Inertial/EuRoC.yaml ~/Datasets/EuRoC/MH01 ./Examples/Monocular-Inertial/EuRoC_TimeStamps/MH01.txt dataset-MH01_monoimu
 
 ```
@@ -93,6 +94,7 @@ unzip MH_01_easy.zip -d MH01/
 
 - Run:
 ```
+cd ~/Dev/ORB_SLAM3
 ./Examples/Monocular-Inertial/mono_inertial_realsense_t265 Vocabulary/ORBvoc.txt ./Examples/Monocular-Inertial/RealSense_T265.yaml 
 ```
 
