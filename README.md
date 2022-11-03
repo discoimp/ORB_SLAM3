@@ -32,7 +32,7 @@ First check if the path to your missing component is referenced here: “/etc/ld
 gedit /etc/ld.so.conf
 #then run this to flush the cache (I guess) .
 sudo ldconfig
-
+```
 # if the library still is not working we can do this ugly move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
 I've pasted the [relevant] commands here (given you have completed the steps above):
 WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea. So this seems like a risky move.
