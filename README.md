@@ -24,18 +24,21 @@ cmake ..
 make -j4
 sudo make install
 ```
-## CODA - Jump to 1.2 OpenCV for now, but if "3. Run examples" fail in the end, come back here (at own risk...)
+## 1.1.5 CODA
+- Jump to 1.2 OpenCV for now, but if "3. Run examples" fail in the end, come back here (at own risk...)
 
 I ran into trouble running the dataset due to an error described by someone else here: [issue 399](https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399)
 First check if the path to your missing component is referenced here: “/etc/ld.so.conf" (I guess you need to follow the links)
+## First try:
 ```
 gedit /etc/ld.so.conf
 #then run this to flush the cache (I guess) .
 sudo ldconfig
 ```
-# if the library still is not working we can do this ugly move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
+# else: install homebrew:
+if the library still is not working we can do this unsactioned move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
 I've pasted the [relevant] commands here (given you have completed the steps above):
-WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea. So this seems like a risky move.
+WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea if you don't know what you're doing. So this seems like a risky move.
 
 ```
 sudo apt update
@@ -50,7 +53,8 @@ brew install gcc
 # package manger installed
 
 ```
-# Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
+# Have pangolin check dependencies
+Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
 ```
 cd ~/Dev/Pangolin/
 ./scripts/install_prerequisites.sh -m brew all
@@ -58,7 +62,7 @@ cd ~/Dev/Pangolin/
 cmake -B build
 cmake --build build
 ```
-
+# Go back to Examples and try again.
 
 
 ### 1.2 OpenCV
