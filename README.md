@@ -110,18 +110,23 @@ chmod +x build.sh
 
 ## 3. Run examples
 
-### [EuRoC datset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets):
+[EuRoC datset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets):
 
 # Download
+```
 cd ~
 mkdir -p Datasets/EuRoC
 cd Datasets/EuRoC/
 wget -c http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip
 mkdir MH01
 unzip MH_01_easy.zip -d MH01/
+```
 
-# if the following examples fail -> Dal segno al Coda (Go back up to the latter part of Pangolin).
+# Error?
+if the following examples fail with something related to Pangolin. I got "./Examples/Monocular/mono_euroc: error while loading shared libraries: libpango_windowing.so: cannot open shared object file: No such file or directory"
+then go back up to the latter part of Pangolin.
 # Run in mono-inertial mode
+```
 cd ~/Dev/ORB_SLAM3
 ./Examples/Monocular-Inertial/mono_inertial_euroc ./Vocabulary/ORBvoc.txt ./Examples/Monocular-Inertial/EuRoC.yaml ~/Datasets/EuRoC/MH01 ./Examples/Monocular-Inertial/EuRoC_TimeStamps/MH01.txt dataset-MH01_monoimu
 
