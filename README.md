@@ -24,6 +24,43 @@ cmake ..
 make -j4
 sudo make install
 ```
+## CODA - Jump to 1.2 OpenCV for now, but if "3. Run examples" fail in the end, come back here (at own risk...)
+
+I ran into trouble running the dataset due to an error described by someone else here: [issue 399](https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399)
+First check if the path to your missing component is referenced here: “/etc/ld.so.conf" (I guess you need to follow the links)
+```
+gedit /etc/ld.so.conf
+#then run this to flush the cache (I guess) .
+sudo ldconfig
+
+# if the library still is not working we can do this ugly move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
+I've pasted the [relevant] commands here (given you have completed the steps above):
+WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea. So this seems like a risky move.
+
+```
+sudo apt update
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#The above command may take a while
+#Then tell the system about it's new package manager super skill:
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#Check if all is okay
+brew doctor
+#then
+brew install gcc
+# package manger installed
+
+```
+# Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
+```
+cd ~/Dev/Pangolin/
+./scripts/install_prerequisites.sh -m brew all
+#If it fails, try running it again. I had to run it twice.
+cmake -B build
+cmake --build build
+```
+
+
+
 ### 1.2 OpenCV
 
 Check the OpenCV version on your computer (required at leat 3.0 as stated in the original `README.md`):
@@ -70,18 +107,7 @@ chmod +x build.sh
 ## 3. Run examples
 
 ### [EuRoC datset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets):
-I ran into trouble running the dataset due to a error: described by someone else here: https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399
-First check if the path to your missing component is here: “/etc/ld.so.conf"
-```
-gedit /etc/ld.so.conf
-#then run this to flush the cache (I guess) .
-sudo ldconfig
-# if the library still is not working we can do this ugly move: https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script
-I've pasted the commands here:
 
-```
-
-```
 # Download
 cd ~
 mkdir -p Datasets/EuRoC
@@ -90,6 +116,7 @@ wget -c http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hal
 mkdir MH01
 unzip MH_01_easy.zip -d MH01/
 
+# if the following examples fail -> Dal segno al Coda (Go back up to the latter part of Pangolin).
 # Run in mono-inertial mode
 cd ~/Dev/ORB_SLAM3
 ./Examples/Monocular-Inertial/mono_inertial_euroc ./Vocabulary/ORBvoc.txt ./Examples/Monocular-Inertial/EuRoC.yaml ~/Datasets/EuRoC/MH01 ./Examples/Monocular-Inertial/EuRoC_TimeStamps/MH01.txt dataset-MH01_monoimu
