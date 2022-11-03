@@ -133,8 +133,14 @@ cd ~/Dev/ORB_SLAM3
 ./Examples/Monocular-Inertial/mono_inertial_euroc ./Vocabulary/ORBvoc.txt ./Examples/Monocular-Inertial/EuRoC.yaml ~/Datasets/EuRoC/MH01 ./Examples/Monocular-Inertial/EuRoC_TimeStamps/MH01.txt dataset-MH01_monoimu
 
 ```
-### Connect own camera
-For now I'm tweaking this: https://github.com/discoimp/rpg_dvs_ros
+### Connect own event camera
+For now I'm tweaking this:[rpg_dvs_ros](https://github.com/discoimp/rpg_dvs_ros)
+
+Then learn how to calibrate your own camera:
+First publish a camera node in ros:
+https://automaticaddison.com/working-with-ros-and-opencv-in-ros-noetic/
+Then Calibrate it:
+http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration
 
 ## Changelog:
 ### 13-Aug-2022
