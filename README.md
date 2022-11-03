@@ -13,7 +13,7 @@ sudo apt update
 sudo apt-get install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev libjasper-dev libglew-dev libboost-all-dev libssl-dev
 sudo apt install libeigen3-dev curl
 ```
-### 1.1 Pangolin:
+## 1.1 Pangolin:
 ```
 mkdir ~/Dev
 cd ~/Dev
@@ -29,13 +29,13 @@ sudo make install
 
 I ran into trouble running the dataset due to an error described by someone else here: [issue 399](https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399)
 First check if the path to your missing component is referenced here: “/etc/ld.so.conf" (I guess you need to follow the links)
-## First try:
+### First try:
 ```
 gedit /etc/ld.so.conf
 #then run this to flush the cache (I guess) .
 sudo ldconfig
 ```
-# else: install homebrew:
+### else: install homebrew:
 if the library still is not working we can do this unsactioned move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
 I've pasted the [relevant] commands here (given you have completed the steps above):
 WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea if you don't know what you're doing. So this seems like a risky move.
@@ -53,7 +53,7 @@ brew install gcc
 # package manger installed
 
 ```
-# Have pangolin check dependencies
+### Have pangolin check dependencies
 Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
 ```
 cd ~/Dev/Pangolin/
@@ -62,10 +62,10 @@ cd ~/Dev/Pangolin/
 cmake -B build
 cmake --build build
 ```
-# Go back to Examples and try again.
+### Go back to Examples and try again.
 
 
-### 1.2 OpenCV
+## 1.2 OpenCV
 
 Check the OpenCV version on your computer (required at leat 3.0 as stated in the original `README.md`):
 ```
@@ -81,13 +81,15 @@ cd ~/Dev
 git clone https://github.com/opencv/opencv
 git -C opencv checkout 4.4.0
 gedit ~/Dev/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp
-
-Add these lines at line 42:
+```
+A script just opened, now add the following lines in the top:
+```
 #define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)
 #define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER
 #define AVFMT_RAWPICTURE 0x0020
-
-
+```
+Then continue as usual:
+```
 mkdir -p ~/Dev/opencv/build
 cd ~/Dev/opencv/build
 cmake ..
