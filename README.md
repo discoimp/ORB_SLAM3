@@ -1,3 +1,10 @@
+This edit was in late October 2022 as the amount of fixes and edits needed to make this work on a fersh install of Ubuntu 20.04 grew long.
+Shoutout to the following (and numerous forums) for contributions:
+[thien94](https://github.com/thien94/ORB_SLAM3)
+[Mauhing](https://github.com/Mauhing/ORB_SLAM3)
+[shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
+
+
 # ORB-SLAM3 
 ### [Link to original ORB-SLAM3's README.md](https://github.com/UZ-SLAMLab/ORB_SLAM3)
 
