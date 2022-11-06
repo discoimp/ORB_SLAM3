@@ -1,13 +1,46 @@
-# ORB-SLAM3 
+# Noob Tutorial: Ubuntu 20.04 + ORB-SLAM3 + Ros Noetic + your own camera
 ### [Link to original ORB-SLAM3's README.md](https://github.com/UZ-SLAMLab/ORB_SLAM3)
+### [Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md)
 
-This fork incorporates the changes that I find necessary to make it easier and more straightforward to install and run ORB-SLAM3 on Ubuntu 20.04.
-[edit] This edit was made late October 2022 based on the forks of (at least):
-[thien94](https://github.com/thien94/ORB_SLAM3)
+By following these instructions you will be able to install ORB SLAM 3 with ROS Noetic on a fresh install of Ubuntu 20.04.5 LTS, publish your camera on a ros node and run SLAM on the included datasets.
 
-[Mauhing](https://github.com/Mauhing/ORB_SLAM3)
+In a future update this will also cover running SLAM on your own dataset, including calibration of camera.
 
-[shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
+## 0. Things to consider (for noobs)
+Some of the packages we are building require a certain amount of memory.
+If you are running Ubuntu in a virtual environment you should allocate 12Gb of memory to Ubuntu or install Ubuntu as a dual boot to give it all your RAM.
+If you only have say 8 Gb available I encourage you to follow these steps to increase your swap disk (think of it as fake RAM using HDD space) [ask Ubuntu - increase Swap](https://askubuntu.com/questions/1264568/increase-swap-in-20-04).
+I've pasted the commands here:
+
+### 0.1 Create a new swap file:
+```
+swapon --show
+```
+Disable and delete it:
+```
+sudo swapoff /swapfile  
+sudo rm  /swapfile
+```
+Don't create a swap bigger than the amount of RAM available as this [might cause issues](https://haydenjames.io/linux-performance-almost-always-add-swap-space/).
+Do simple math: set swap to say 8Gb (8 * 1024 = 8192) or 16Gb (16 * 1024 = 16384).
+```
+#The following command will allocate 8Gb for swap:
+sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+```
+grant root permissions and format as swap:
+```
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+```
+Be patient, my machine froze for a while during this step.
+```
+sudo swapon /swapfile
+```
+and reboot for it to take effect. To verify repeat the top command
+```
+reboot
+```
+
 
 ## 1. Install
 
