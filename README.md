@@ -1,14 +1,13 @@
-This edit was in late October 2022 as the amount of fixes and edits needed to make this work on a fersh install of Ubuntu 20.04 grew long.
-Shoutout to the following (and numerous forums) for unknowingly contributing to me understanding what I didn't understand:
-[thien94](https://github.com/thien94/ORB_SLAM3)
-[Mauhing](https://github.com/Mauhing/ORB_SLAM3)
-[shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
-
-
 # ORB-SLAM3 
 ### [Link to original ORB-SLAM3's README.md](https://github.com/UZ-SLAMLab/ORB_SLAM3)
 
 This fork incorporates the changes that I find necessary to make it easier and more straightforward to install and run ORB-SLAM3 on Ubuntu 20.04.
+[edit] This edit was made late October 2022 based on the forks of (at least):
+[thien94](https://github.com/thien94/ORB_SLAM3)
+
+[Mauhing](https://github.com/Mauhing/ORB_SLAM3)
+
+[shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
 
 ## 1. Install
 
@@ -31,46 +30,6 @@ cmake ..
 make -j4
 sudo make install
 ```
-## 1.1.5 CODA
-- Jump to 1.2 OpenCV for now, but if "3. Run examples" fail in the end, come back here (at own risk...)
-
-I ran into trouble running the dataset due to an error described by someone else here: [issue 399](https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399)
-First check if the path to your missing component is referenced here: “/etc/ld.so.conf" (I guess you need to follow the links)
-### First try:
-```
-gedit /etc/ld.so.conf
-#then run this to flush the cache (I guess) .
-sudo ldconfig
-```
-### else: install homebrew:
-if the library still is not working we can do this unsactioned move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
-I've pasted the [relevant] commands here (given you have completed the steps above):
-WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea if you don't know what you're doing. So this seems like a risky move.
-
-```
-sudo apt update
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#The above command may take a while
-#Then tell the system about it's new package manager super skill:
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-#Check if all is okay
-brew doctor
-#then
-brew install gcc
-# package manger installed
-
-```
-### Have pangolin check dependencies
-Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
-```
-cd ~/Dev/Pangolin/
-./scripts/install_prerequisites.sh -m brew all
-#If it fails, try running it again. I had to run it twice.
-cmake -B build
-cmake --build build
-```
-### Go back to Examples and try again.
-
 
 ## 1.2 OpenCV
 
@@ -104,14 +63,15 @@ make -j4
 sudo make install
 ```
 
-## 2. Build
+## 2. Install ORB SLAM 3
 
+Clone the repo
 ```
-# Clone the repo:
 cd ~/Dev
 git clone https://github.com/discoimp/ORB_SLAM3.git ORB_SLAM3
-
-# Build
+```
+Run the shell file containing the build commands. If you later need to build only 
+```
 cd ORB_SLAM3
 chmod +x build.sh
 ./build.sh
@@ -121,7 +81,7 @@ chmod +x build.sh
 
 [EuRoC datset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets):
 
-# Download
+### Download datasets
 ```
 cd ~
 mkdir -p Datasets/EuRoC
@@ -131,7 +91,7 @@ mkdir MH01
 unzip MH_01_easy.zip -d MH01/
 ```
 
-# Error?
+## Error?
 if the following examples fail with something related to Pangolin. I got "./Examples/Monocular/mono_euroc: error while loading shared libraries: libpango_windowing.so: cannot open shared object file: No such file or directory"
 then go back up to the latter part of Pangolin.
 # Run in mono-inertial mode
