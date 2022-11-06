@@ -1,18 +1,25 @@
 # Noob Tutorial: Ubuntu 20.04 + ORB-SLAM3 + Ros Noetic + your own camera
-### [Link to original ORB-SLAM3's README.md](https://github.com/UZ-SLAMLab/ORB_SLAM3)
-### [Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md)
+[Link to original ORB-SLAM3's README.md](https://github.com/UZ-SLAMLab/ORB_SLAM3)
 
-By following these instructions you will be able to install ORB SLAM 3 with ROS Noetic on a fresh install of Ubuntu 20.04.5 LTS, publish your camera on a ros node and run SLAM on the included datasets.
+[Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md)
 
-In a future update this will also cover running SLAM on your own dataset, including calibration of camera.
+By following these instructions you will be able to run ORB SLAM 3 with ROS Noetic on a fresh install of Ubuntu 20.04.5 LTS, publish your camera on a ros node and run SLAM on the included datasets.
+
+In a future update this will also cover running SLAM on your own dataset, including calibration of your camera.
 
 ## 0. Things to consider (for noobs)
+### 0.1 Update your system
+Make sure your system is up to date. Open a terminal [ctrl + alt + t] and run
+```
+sudo apt update && sudo apt upgrade
+#restart if necessary
+```
+### 0.2 Create a new swap file:
 Some of the packages we are building require a certain amount of memory.
 If you are running Ubuntu in a virtual environment you should allocate 12Gb of memory to Ubuntu or install Ubuntu as a dual boot to give it all your RAM.
 If you only have say 8 Gb available I encourage you to follow these steps to increase your swap disk (think of it as fake RAM using HDD space) [ask Ubuntu - increase Swap](https://askubuntu.com/questions/1264568/increase-swap-in-20-04).
 I've pasted the commands here:
 
-### 0.1 Create a new swap file:
 ```
 swapon --show
 ```
@@ -42,13 +49,12 @@ reboot
 ```
 
 
-## 1. Install
+## 1. Install Dependencies
 
-### Dependencies
+Run the following commands in terminal
 ```
 sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
 sudo apt update
-
 sudo apt-get install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev libjasper-dev libglew-dev libboost-all-dev libssl-dev
 sudo apt install libeigen3-dev curl
 ```
@@ -59,8 +65,17 @@ cd ~/Dev
 git clone https://github.com/stevenlovegrove/Pangolin.git
 cd Pangolin
 mkdir build && cd build
+```
+The source code is now on your machine and the following command will create building instructions based on dependencies listed in CMakeLists.txt (~/Dev/Pangolin/CMakeLists.txt)
+```
 cmake ..
+```
+The -j4 specifies how many jobs you would like to process simultaniously. If the build fails try again with "-j1" before turning to google.
+```
 make -j4
+```
+If successful finish the installation by running:
+```
 sudo make install
 ```
 
