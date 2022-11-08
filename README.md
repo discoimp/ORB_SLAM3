@@ -14,7 +14,7 @@ Make sure your system is up to date. Open a terminal [ctrl + alt + t] and run
 sudo apt update && sudo apt upgrade
 #restart if necessary
 ```
-### 0.2 Create a new swap file:
+### 0.2 Create a new swap file (optional):
 Some of the packages we are building require a certain amount of memory.
 If you are running Ubuntu in a virtual environment you should allocate 12Gb of memory to Ubuntu or install Ubuntu as a dual boot to give it all your RAM.
 If you only have say 8 Gb available I encourage you to follow these steps to increase your swap disk (think of it as fake RAM using HDD space) [ask Ubuntu - increase Swap](https://askubuntu.com/questions/1264568/increase-swap-in-20-04).
@@ -113,12 +113,12 @@ sudo make install
 
 ## 2. Install ORB SLAM 3
 
-Clone the repo
+Clone the repo like this:
 ```
 cd ~/Dev
 git clone https://github.com/discoimp/ORB_SLAM3.git ORB_SLAM3
 ```
-Run the shell file containing the build commands. If you later need to build only 
+Run the shell file containing several build commands.
 ```
 cd ORB_SLAM3
 chmod +x build.sh
@@ -141,7 +141,7 @@ unzip MH_01_easy.zip -d MH01/
 
 ## Error?
 if the following examples fail with something related to Pangolin. I got "./Examples/Monocular/mono_euroc: error while loading shared libraries: libpango_windowing.so: cannot open shared object file: No such file or directory"
-then go back up to the latter part of Pangolin.
+then go to the bottom of this README to find one possible solution:
 # Run in mono-inertial mode
 ```
 cd ~/Dev/ORB_SLAM3
@@ -157,8 +157,42 @@ https://automaticaddison.com/working-with-ros-and-opencv-in-ros-noetic/
 Then Calibrate it:
 http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration
 
-## Changelog:
-### 13-Aug-2022
-Work with Ubuntu 20.04, no additional installation of OpenCV or C++ required:
-- Update CMakeLists.txt to use OpenCV 4.2 mimimum.
-- Update CMakeLists.txt to use C++14 instead of C++11.
+## Pangolin (fix only if broken):
+This is a bit more advanced, but not impossible.
+
+I ran into trouble running the dataset and received the same error described by someone else here: [issue 399](https://github.com/UZ-SLAMLab/ORB_SLAM3/issues/399)
+First check if the path to your missing component is referenced in this: “/etc/ld.so.conf" (follow and open the paths listed)
+### First try:
+```
+gedit /etc/ld.so.conf
+#then run this to flush the cache (I guess) .
+sudo ldconfig
+```
+### else: install homebrew:
+if the library still is not working we can do this unsactioned move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
+I've pasted the [relevant] commands here (given you have completed the steps above):
+WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea if you don't know what you're doing. So this seems like a risky move.
+
+```
+sudo apt update
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#The above command may take a while
+#Then tell the system about it's new package manager super skill:
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#Check if all is okay
+brew doctor
+#then
+brew install gcc
+# package manger installed
+
+```
+### Have pangolin check dependencies
+Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
+```
+cd ~/Dev/Pangolin/
+./scripts/install_prerequisites.sh -m brew all
+#If it fails, try running it again. I had to run it twice.
+cmake -B build
+cmake --build build
+```
+### Go back to Examples and try again.
