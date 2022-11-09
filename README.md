@@ -3,6 +3,8 @@
 
 [Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md)
 
+disclaimer: I started my journey in the world of Ubuntu and ROS May 2022 (i.e. a noob). These instructons are written mainly for myself as I learn. If in doubt (as you should be) follow this instead: [shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
+
 By following these instructions you will be able to run ORB SLAM 3 with ROS Noetic on a fresh install of Ubuntu 20.04.5 LTS, publish your camera on a ros node and run SLAM on the included datasets.
 
 In a future update this will also cover running SLAM on your own dataset, including calibration of your camera.
@@ -70,7 +72,7 @@ The source code is now on your machine and the following command will create bui
 ```
 cmake ..
 ```
-The -j4 specifies how many jobs you would like to process simultaniously. If the build fails try again with "-j1" before turning to google.
+The -j4 specifies how many jobs you would like to process simultaniously. If the build fails, try again with "-j1" before turning to google.
 ```
 make -j4
 ```
@@ -89,7 +91,7 @@ On a freshly installed Ubuntu 20.04.4 LTS with desktop image, OpenCV 4.2.0 is in
 - [General installation instruction](https://docs.opencv.org/4.x/d0/d3d/tutorial_general_install.html). 
 - If you want CUDA to be included: [How to install OpenCV 4.5.2 with CUDA 11.2 and CUDNN 8.2 in Ubuntu 20.04](https://gist.github.com/raulqf/f42c718a658cddc16f9df07ecc627be7)
 
-For example, the main commands for OpenCV 4.4.0 without CUDA and other bells and whistles:
+For example, the main commands for OpenCV 4.4.0 (without CUDA):
 ```
 cd ~/Dev
 git clone https://github.com/opencv/opencv
@@ -138,7 +140,7 @@ wget -c http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hal
 mkdir MH01
 unzip MH_01_easy.zip -d MH01/
 ```
-If you later intend to use ROS with the examples run this now to point it in the correct direction:
+If you later intend to use ROS with the examples, just run this now to point it in the correct direction:
 ```
 echo "export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:~Dev/ORB_SLAM3/Examples_old/ROS" >> ~/.bashrc
 ```
@@ -168,33 +170,43 @@ First check if the path to your missing component is referenced in this: “/etc
 ### First try:
 ```
 gedit /etc/ld.so.conf
-#then run this to flush the cache (I guess) .
+```
+then run this to flush the cache (I guess)
+```
 sudo ldconfig
 ```
 ### else: install homebrew:
 if the library still is not working we can do this unsactioned move: [homebrew install instruction](https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/#3_Run_Homebrew_installation_script)
 I've pasted the [relevant] commands here (given you have completed the steps above):
-WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea if you don't know what you're doing. So this seems like a risky move.
+WARNING: If you google "use several package managers Linux" or simular, it comes out as a bad idea if you don't know what you're doing. So this seems like a risky move, but it worked for me (so far...).
 
 ```
 sudo apt update
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#The above command may take a while
-#Then tell the system about it's new package manager super skill:
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-#Check if all is okay
-brew doctor
-#then
-brew install gcc
-# package manger installed
-
 ```
+The above command may take a while
+Then tell the system about it's new package manager super skill:
+```
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+Check if all is okay
+```
+brew doctor
+```
+then:
+```
+brew install gcc
+```
+package manger should now be installed
+
 ### Have pangolin check dependencies
 Now we can check dependencies of Pangolin using brew. If I understand this correctly this may override some of the installations you already have going, and migth lead to complex epic failures.
 ```
 cd ~/Dev/Pangolin/
 ./scripts/install_prerequisites.sh -m brew all
-#If it fails, try running it again. I had to run it twice.
+```
+If it fails, try running it again. I had to run it twice.
+```
 cmake -B build
 cmake --build build
 ```
@@ -204,7 +216,7 @@ cmake --build build
 [Install Noetc on Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
 ## Install ROS drivers for Event camera:
-[Install guide Davis ++ drivers](https://github.com/discoimp/rpg_dvs_ros)
+[Install guide Davis ++ drivers](https://github.com/discoimp/rpg_dvs_ros) -includes setting up a catkin build workspace
 
 ## Install ROS Wrapper
 [Orb Slam Wrapper](https://github.com/discoimp/orb_slam3_ros_wrapper)
