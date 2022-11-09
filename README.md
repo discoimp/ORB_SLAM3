@@ -212,6 +212,8 @@ cmake --build build
 ```
 ### Go back to Examples and try again.
 
+## [thien94 ros addon](https://github.com/thien94/orb_slam3_ros) have not tested yet.
+
 ## Install ROS Noetic on Ubuntu 20.04:
 [Install Noetc on Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
