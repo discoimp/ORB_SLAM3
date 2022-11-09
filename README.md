@@ -3,7 +3,7 @@
 
 [Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md)
 
-disclaimer: I started my journey in the world of Ubuntu and ROS May 2022 (i.e. a noob). These instructons are written mainly for myself as I learn. If in doubt (as you should be) follow this instead: [shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
+disclaimer: I started my journey in the world of Ubuntu and ROS May 2022 (i.e. a noob). These instructions are written mainly for myself as I learn. If in doubt (as you should be) follow this instead: [shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
 
 By following these instructions you will be able to run ORB SLAM 3 with ROS Noetic on a fresh install of Ubuntu 20.04.5 LTS, publish your camera on a ros node and run SLAM on the included datasets.
 
