@@ -138,7 +138,10 @@ wget -c http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hal
 mkdir MH01
 unzip MH_01_easy.zip -d MH01/
 ```
-
+If you later intend to use ROS with the examples run this now to point it in the correct direction:
+```
+echo "export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:~Dev/ORB_SLAM3/Examples_old/ROS" >> ~/.bashrc
+```
 ## Error?
 if the following examples fail with something related to Pangolin. I got "./Examples/Monocular/mono_euroc: error while loading shared libraries: libpango_windowing.so: cannot open shared object file: No such file or directory"
 then go to the bottom of this README to find one possible solution:
