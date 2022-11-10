@@ -59,6 +59,13 @@ sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security m
 sudo apt update
 sudo apt-get install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev libjasper-dev libglew-dev libboost-all-dev libssl-dev
 sudo apt install libeigen3-dev curl
+
+#pending confirmation:
+sudo apt-get install libcanberra-gtk-module
+# or (if fail):
+sudo apt-get install libcanberra-gtk0
+
+
 ```
 ## 1.1 Pangolin:
 ```
