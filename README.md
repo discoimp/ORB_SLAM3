@@ -1,7 +1,9 @@
 # Noob Tutorial: Ubuntu 20.04 + ORB-SLAM3 + Ros Noetic + your own camera
 [Link to original ORB-SLAM3's README.md](https://github.com/UZ-SLAMLab/ORB_SLAM3)
 
-[Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md)
+[Link to thien94's README.md](https://github.com/thien94/ORB_SLAM3/blob/master/README.md) Had already implemented many updates
+
+[Link to Mauhing's fork](https://github.com/Mauhing/ORB_SLAM3) Other fixes, some incorporated here.
 
 disclaimer: I started my journey in the world of Ubuntu and ROS May 2022 (i.e. a noob). These instructions are written mainly for myself as I learn. If in doubt (as you should be) follow this instead: [shanpenghui](https://github.com/shanpenghui/ORB_SLAM3_Fixed)
 
