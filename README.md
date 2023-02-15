@@ -57,7 +57,7 @@ reboot
 
 Run the following commands in terminal
 ```
-sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu $(lsb_release -cs)-security main"
 sudo apt update
 sudo apt-get install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev libjasper-dev libglew-dev libboost-all-dev libssl-dev
 sudo apt install libeigen3-dev curl
@@ -98,13 +98,10 @@ For example, the main commands for OpenCV 4.4.0 (without CUDA):
 cd ~/Dev
 git clone https://github.com/opencv/opencv
 git -C opencv checkout 4.4.0
-gedit ~/Dev/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp
 ```
-A script just opened, now add the following lines in the top:
+Solve a problem regarding [ffmpeg](https://blog.csdn.net/goodxin_ie/article/details/82856008) by running this command:
 ```
-#define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)
-#define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER
-#define AVFMT_RAWPICTURE 0x0020
+sed -i 's/using namespace cv;/&\n#define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)\n#define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER\n#define AVFMT_RAWPICTURE 0x0020/' ~/Dev/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp
 ```
 Then continue as usual:
 ```
